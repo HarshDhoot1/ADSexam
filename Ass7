@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_VERTICES 20
+
+int vertArr[MAX_VERTICES][MAX_VERTICES] = {0}; // Adjacency matrix initially all 0s
+
+void displayMatrix(int v) {
+    printf("Adjacency Matrix:\n   ");
+    for (int i = 0; i < v; ++i) {
+        printf("%d ", i);
+    }
+    printf("\n");
+    for (int i = 0; i < v; ++i) {
+        printf("%d  ", i);
+        for (int j = 0; j < v; ++j) {
+            printf("%d ", vertArr[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void add_edge(int u, int v, int vertArr[][MAX_VERTICES]) {
+    vertArr[u][v] = 1;
+    vertArr[v][u] = 1;
+}
+
+int main() {
+    int v, e; // Number of vertices and edges in the graph
+    printf("Enter the number of vertices in the graph: ");
+    scanf("%d", &v);
+
+    printf("Enter the number of edges in the graph: ");
+    scanf("%d", &e);
+
+    printf("The graph is zero based\nEnter the edges (vertex pairs separated by space):\n");
+    for (int i = 0; i < e; ++i) {
+        int u, v;
+        scanf("%d %d", &u, &v);
+        add_edge(u, v, vertArr);
+    }
+
+    displayMatrix(v);
+
+    return 0;
+}
